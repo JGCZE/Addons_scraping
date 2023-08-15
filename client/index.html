@@ -17,8 +17,8 @@
         <h1>Analýza shoptet doplňku</h1>
         <p>Níže vložte odkaz na eshop, běžící na shoptetu ve formátu "www.jmenoobchodu.cz"</p>
         <div class="main-input">
-            <input type="text">
-            <button>Analyze</button>
+            <input type="text" id="input-for-analyze">
+            <button id="button">Analyze</button>
         </div>
 
         <div class="results">
@@ -48,7 +48,9 @@
     </footer>
 
 
-    <script src="./script.js"></script>
+    <script type="module" src="./script.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 
 </body>
 </html>

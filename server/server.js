@@ -10,7 +10,19 @@ const cheerio = require('cheerio');
 app.use(cors());    
 app.use(express.json());
 
+
+
+
 //create connection to database
+
+
+// get user value from input, from frontend
+app.post("/analyze", (req, res) => {
+    console.log(req.body)
+    const textFromClient = req.body;
+    console.log(textFromClient);
+    res.send("Hello from server");
+})
 
 
 //scraping data from website
