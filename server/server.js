@@ -14,22 +14,22 @@ app.use(express.json());
 
 
 //scraping data from website
-const url = 'https://www.gymio.com/'
+// const url = 'https://www.gymio.com/'
 
-request(url, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      const $ = cheerio.load(body);
+// request(url, (error, response, body) => {
+//     if (!error && response.statusCode === 200) {
+//       const $ = cheerio.load(body);
   
-      // Získání všech zakomentovaných informací v sekci "head"
-      $('head').contents().each((index, element) => {
-        if (element.type === 'comment') {
-          console.log(element.data.trim());
-        }
-      });
-    } else {
-      console.error('Chyba při požadavku na stránku:', error);
-    }
-  });
+//       // Získání všech zakomentovaných informací v sekci "head"
+//       $('head').contents().each((index, element) => {
+//         if (element.type === 'comment') {
+//           console.log(element.data.trim());
+//         }
+//       });
+//     } else {
+//       console.error('Chyba při požadavku na stránku:', error);
+//     }
+//   });
 
 
 app.listen(port, () => console.log(`Server running on PORT ${port} 🔥🔥🔥`))
