@@ -18,8 +18,17 @@ button.addEventListener('click', function() {
     getAddons();
 });
 
+const getAddons = () => {
+    axios.get('http://localhost:3001/getAddons')
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.log(error);
+        }
+    );
+}
 
 
 
-console.log(typeof(output))
 

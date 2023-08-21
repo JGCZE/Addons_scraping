@@ -87,6 +87,16 @@ async function processAddons(addonsArray, howMuchAddons) {
     }
 }
 
+app.get("/getAddons", (req, res) => {
+    db.query('SELECT * FROM addons', (err, result) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send(result);
+        }
+    })
+})
+
 
 
 
