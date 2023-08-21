@@ -5,9 +5,7 @@ const button = document.getElementById('button');
 let valueFromUser = 
 
 button.addEventListener('click', function() {
-    console.log('click');
     valueFromUser = input.value;
-    console.log(valueFromUser);
     
     axios.post('http://localhost:3001/analyze', { valueFromUser })
         .then(response => {
@@ -17,6 +15,11 @@ button.addEventListener('click', function() {
             console.log(error);
         }
     );
+    getAddons();
 });
 
+
+
+
+console.log(typeof(output))
 
