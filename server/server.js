@@ -6,8 +6,6 @@ const cors = require('cors');
 
 const request = require('request');
 const cheerio = require('cheerio');
-const { add } = require('date-fns');
-const { ro } = require('date-fns/locale');
 
 app.use(cors());    
 app.use(express.json());
@@ -45,8 +43,13 @@ app.post("/analyze", (req, res) => {
 
     // array for all addons
     const AllAddons = [];
+    // call function for scraping data
+    getScrapedData(url, AllAddons)
+   
+});
 
-    // Scraping data from website
+// Scraping data from url
+function getScrapedData(url, AllAddons) {
     request(url, (error, response, body) => {
         if (!error && response.statusCode === 200) {
             const $ = cheerio.load(body);
@@ -63,15 +66,17 @@ app.post("/analyze", (req, res) => {
                 }
             });
             let howMuchAddons = AllAddons.length;
+            // call function for inserting data to database
             processAddons(AllAddons, howMuchAddons);
         } else {
             console.error('Chyba při požadavku na stránku:', error);
         }
     });
-});
+}
 
-async function processAddons(addonsArray, howMuchAddons) {
-    for (let i = (howMuchAddons - 1); i < addonsArray.length; i++) {
+// function for inserting data to database
+function processAddons(addonsArray, howMuchAddons) {
+    for (let i = (howMuchAddons -1); i < addonsArray.length; i++) {
         const row = addonsArray[i];
 
         // Insert into DB
@@ -96,7 +101,6 @@ app.get("/getAddons", (req, res) => {
         }
     })
 })
-
 
 
 
