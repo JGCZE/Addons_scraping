@@ -18,6 +18,9 @@ button.addEventListener('click', function() {
             console.log(error);
         }
     );
+        // routing to another page
+        //window.location.href = `http://localhost:3001/${valueFromUser}`
+
 });
 
 function getAddons() {

@@ -6,6 +6,8 @@ const cors = require('cors');
 
 const request = require('request');
 const cheerio = require('cheerio');
+const { da } = require('date-fns/locale');
+
 
 app.use(cors());    
 app.use(express.json());
@@ -32,9 +34,6 @@ app.get("/", (req, res) => {
     })
 })
 
-
-
-
 // get user value from input, from frontend
 app.post("/analyze", (req, res) => {
     // format to correct url
@@ -48,31 +47,49 @@ app.post("/analyze", (req, res) => {
    
 });
 
+
 // Scraping data from url
 function getScrapedData(url, AllAddons) {
     request(url, (error, response, body) => {
         if (!error && response.statusCode === 200) {
             const $ = cheerio.load(body);
 
-            // Získání všech zakomentovaných informací v sekci "head"
+            //Získání všech zakomentovaných informací v sekci "head"
             $('head').contents().each((index, element) => {
                 if (element.type === 'comment') {
                     // get data from comment
                     const commentData = element.data.toString();
-                    console.log(commentData);
                     // split to rows
                     const row = commentData.split("\n");
                     AllAddons.push(row);
                 }
             });
+
+            // scraping dataLayer from head
+            const dataLayer = $('head script').html();
+            const projectIdPattern = /"projectId":\s*(\d+),/;
+            const match = dataLayer.match(projectIdPattern);
+            
+            if (match && match[1]) {
+                const projectId = parseInt(match[1]);
+                console.log("projectId:", projectId);
+            } else {
+                console.log("projectId not found");
+            }
+    
+         
+
+
+
             let howMuchAddons = AllAddons.length;
             // call function for inserting data to database
-            processAddons(AllAddons, howMuchAddons);
+            //processAddons(AllAddons, howMuchAddons);
         } else {
             console.error('Chyba při požadavku na stránku:', error);
         }
     });
 }
+
 
 // function for inserting data to database
 function processAddons(addonsArray, howMuchAddons) {
@@ -80,7 +97,7 @@ function processAddons(addonsArray, howMuchAddons) {
         const row = addonsArray[i];
 
         // Insert into DB
-        db.query('INSERT INTO addons (first_addon, second_addon, third_addon) VALUES (?, ?, ?)',
+        db.query('INSERT INTO addon (first_addon, second_addon, third_addon) VALUES (?, ?, ?)',
          [addonsArray[3], addonsArray[4], addonsArray[5]],
           (err, result) => {
             if (err) {
@@ -92,6 +109,8 @@ function processAddons(addonsArray, howMuchAddons) {
     }
 }
 
+
+// get data from database
 app.get("/getAddons", (req, res) => {
     db.query('SELECT * FROM addons', (err, result) => {
         if(err) {
