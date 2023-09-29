@@ -12,7 +12,6 @@ const { da } = require('date-fns/locale');
 app.use(cors());    
 app.use(express.json());
 
-
 //create connection to database
 const db = mysql.createConnection({
     connectionLimit: 10,
@@ -76,11 +75,7 @@ function getScrapedData(url, AllAddons) {
             } else {
                 console.log("projectId not found");
             }
-    
-         
-
-
-
+  
             let howMuchAddons = AllAddons.length;
             // call function for inserting data to database
             //processAddons(AllAddons, howMuchAddons);
@@ -120,8 +115,5 @@ app.get("/getAddons", (req, res) => {
         }
     })
 })
-
-
-
 
 app.listen(port, () => console.log(`Server running on PORT ${port} 🔥🔥🔥`))

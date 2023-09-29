@@ -5,7 +5,6 @@ const button = document.getElementById('button');
 let valueFromUser = 
 
 button.addEventListener('click', function() {
-
     valueFromUser = input.value;
     input.value = "";
     getAddons();
