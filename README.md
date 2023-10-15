@@ -6,8 +6,8 @@
 <img width="40px" src="https://github.com/JGCZE/Addons_scraping/assets/97174593/043dae9c-d48a-4371-937c-b6fadb04132f">
 <img width="40px" src="https://github.com/JGCZE/Addons_scraping/assets/97174593/bc185e24-1f4a-4e13-812d-d8c25191a8ab">
 
-### O projektu
-About the Project
+
+### About the Project
 
 The website serves the purpose of identifying which plugins a Shoptet e-shop uses. The application is still under development. At present, we are awaiting a list with the names of the add-ons. We will proceed afterward
 
