@@ -24,10 +24,9 @@ Data is loaded from the database and the input using GET and POST methods. The U
 <strong> Database: </strong> <br>
 The MySQL database consists of three tables interconnected with M:N relationships.
 
-eshop: ID_eshop, url, last_update
-addon: ID_addon, name, url, dev
-eshop_addon: ID_eshop_addon, ID_eshop, ID_addon
-Outcome:
+1. eshop: ID_eshop, url, last_update <br>
+2. addon: ID_addon, name, url, dev <br>
+3. eshop_addon: ID_eshop_addon, ID_eshop, ID_addon <br>
 
 <strong>Proces: </strong>
 1. The user inputs the URL of a Shoptet e-shop.
